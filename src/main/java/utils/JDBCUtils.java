@@ -17,9 +17,9 @@ import java.time.LocalDate;
 import java.sql.*;
 public class JDBCUtils {
 
-    private static String jdbcURL = "url";
+    private static String jdbcURL = "jdbc:mysql://localhost:3306/todos";
     private static String jdbcUsername = "root";
-    private static String jdbcPassword = "root";
+    private static String jdbcPassword = "Epiphany1107";
 
     //Ham de lay connection voi mysql server
     public static Connection getConnection() {
@@ -27,7 +27,6 @@ public class JDBCUtils {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-            
         } catch(SQLException e) {
             e.printStackTrace();
         } catch(ClassNotFoundException e) {

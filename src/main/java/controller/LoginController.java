@@ -26,31 +26,34 @@ public class LoginController extends HttpServlet {
         loginDao = new LoginDAO();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws ServletException, IOException {
-        response.sendRedirect("login/login.jsp");
+        resp.sendRedirect("login/login.jsp");
+    }
+    
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    throws ServletException, IOException {
+        authenticate(req, resp);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        authenticate(request, response);
-    }
-
-    private void authenticate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    private void authenticate(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
         LoginBean loginBean = new LoginBean();
-        loginBean.setName(username);
+        loginBean.setName(name);
         loginBean.setPassword(password);
 
         try {
             if (loginDao.validate(loginBean)) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-list.jsp");
-                dispatcher.forward(request, response);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("todo/list.jsp");
+                dispatcher.forward(req, resp);
+                HttpSession session = req.getSession();
+                session.setAttribute("user", name);
+
             } else {
-                HttpSession session = request.getSession();
-                // session.setAttribute("user", username);
-                // response.sendRedirect("login.jsp");
+                HttpSession session = req.getSession();
+//                 resp.sendRedirect("login.jsp");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

@@ -24,6 +24,7 @@ public class UserController extends HttpServlet{
     private UserDAO userDAO;
     public void init() {
         userDAO = new UserDAO();
+        System.out.println("init");
     }
 
     @Override
@@ -39,8 +40,13 @@ public class UserController extends HttpServlet{
         String name =  req.getParameter("name");
         String password = req.getParameter("password");
         User user = new User();
+        user.setName(name);
+        user.setPassword(password);
         try {
             int result = userDAO.registerUser(user);
+            if (result == 1) {
+                req.setAttribute("NOTIFICATION", "User Registered Successfully!");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
