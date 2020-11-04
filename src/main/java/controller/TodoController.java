@@ -109,9 +109,6 @@ public class TodoController extends HttpServlet {
         String username = request.getParameter("username");
         String description = request.getParameter("description");
 
-        /*DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-        LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"),df);*/
-
         boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
         Todo newTodo = new Todo(title, username, description, LocalDate.now(), isDone);
         todoDAO.insertTodo(newTodo);
@@ -124,7 +121,6 @@ public class TodoController extends HttpServlet {
         String title = request.getParameter("title");
         String username = request.getParameter("username");
         String description = request.getParameter("description");
-        //DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-mm-dd");
         LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"));
 
         boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
