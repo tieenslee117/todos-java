@@ -12,12 +12,11 @@
         <title>Error Page</title>
     </head>
     <body>
-<!--        <%@ page isErrorPage="true" %>
-        <h2>Ban bi exception cmnr!</h2>
+<!--    <%@ page isErrorPage="true" %>
         <h3><%=exception%></h3>-->
     <center>
         <h1>Error</h1>
-  <h2><%=exception.getMessage() %><br/> </h2>
+        <h2><%=exception.getMessage() %><br/> </h2>
     </center>
     </body>
 </html>
